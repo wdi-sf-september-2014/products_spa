@@ -40,7 +40,10 @@
 <div id="content"></div>
 
 <script type="x-handlebars-template" id="show-products-template">
-	<div class="container">
+	<div class="container margin-top-40">
+		<div>
+			<a data-toggle="modal" data-target="#add-product-modal" class="btn btn-primary">Add New Product</a>
+		</div>
 		<table class="table striped">
 			<thead>
 				<th>Name</th>
@@ -90,6 +93,41 @@
 		</div>
 	</div>
 </script>
+
+<div id="add-product-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Add a New Product</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bold">
+					Title
+				</div>
+				<div class="margin-top-10">
+					<input type="text" class="form-control" />
+				</div>
+				<div class="bold margin-top-10">
+					Description
+				</div>
+				<div class="margin-top-10">
+					<input type="text" class="form-control" />
+				</div>
+				<div class="bold margin-top-10">
+					Count
+				</div>
+				<div class="margin-top-10">
+					<input type="text" class="form-control" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Add New Product</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="libraries/handlebars.js"></script>
