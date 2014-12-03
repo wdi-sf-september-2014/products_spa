@@ -42,3 +42,23 @@ $(document).on("click", ".edit-button", function(){
 		}
 	});
 });
+
+$(document).on("click", "#submit-edits", function(){
+	$.ajax({
+		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products/" + $(this).attr("edit_id"),
+		type: "PUT",
+		data: { 
+			product: {
+				title: $("input[name=title]").val(),
+				desc: $("input[name=desc]").val(),
+				count: $("input[name=count]").val()
+			}
+		},
+		success: function(data) {
+			location.reload();
+		},
+		error: function(data){
+			alert("Something went wrong...");
+		} 
+	});
+});
