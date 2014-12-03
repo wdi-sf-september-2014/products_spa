@@ -57,8 +57,28 @@ $(document).on("click", "#submit-edits", function(){
 		success: function(data) {
 			location.reload();
 		},
-		error: function(data){
+		error: function(){
 			alert("Something went wrong...");
 		} 
+	});
+});
+
+$(document).on("click", "#add-product", function(){
+	$.ajax({
+		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products/",
+		type: "POST",
+		data: {
+			product: {
+				title: $("#add-title").val(),
+				desc:  $("#add-desc").val(),
+				count:  $("#add-count").val()
+			}
+		},
+		success: function(){
+			location.reload();
+		},
+		error: function() {
+			alert("Something wrong adding a product");
+		}
 	});
 });
