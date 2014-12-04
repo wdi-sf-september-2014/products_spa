@@ -82,3 +82,20 @@ $(document).on("click", "#add-product", function(){
 		}
 	});
 });
+
+$(document).on("click",".delete-button",function(){
+	$.ajax({
+		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products/" + $(this).attr("id"),
+		type: "DELETE",
+		success: function(){
+			location.reload();
+		},
+		error: function() {
+			alert("everything's ruined");
+		}
+	});
+});
+
+
+
+
