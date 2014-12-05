@@ -11,8 +11,20 @@ $(document).ready(function() {
 	//Edit product template
 	editProductSource = $("#edit-product-template").html();
 	editProductTemplate = Handlebars.compile(editProductSource);
+});
 
+//Setting up Backbone's routes
 
+var Router = Backbone.Router.extend({
+	routes: {
+		"index":"index",
+		"edit/:id":"edit_product"
+	}
+});
+
+var router = new Router;
+
+function getProducts() {
 	//Pull all products from the API
 	$.ajax({
 		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products",
@@ -25,13 +37,13 @@ $(document).ready(function() {
 			alert("Something went wrong here...");
 		}
 	});
-});
+}
 
-//When user clicks edit button get the product information
-//in preparation for editing
-$(document).on("click", ".edit-button", function(){
+router.on("route:index", getProducts);
+
+router.on("route:edit_product", function(id) {
 	$.ajax({
-		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products/" + $(this).attr("id"),
+		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products/" + id,
 		type: "GET",
 		success: function(data) {
 			var html = editProductTemplate(data);
@@ -42,6 +54,10 @@ $(document).on("click", ".edit-button", function(){
 		}
 	});
 });
+
+//Start Backbone history
+
+Backbone.history.start();
 
 $(document).on("click", "#submit-edits", function(){
 	$.ajax({
@@ -55,7 +71,7 @@ $(document).on("click", "#submit-edits", function(){
 			}
 		},
 		success: function(data) {
-			location.reload();
+			window.location.href = "#index";
 		},
 		error: function(){
 			alert("Something went wrong...");
@@ -75,7 +91,8 @@ $(document).on("click", "#add-product", function(){
 			}
 		},
 		success: function(){
-			location.reload();
+			$("#add-product-modal").modal("hide");
+			getProducts();
 		},
 		error: function() {
 			alert("Something wrong adding a product");
@@ -83,12 +100,12 @@ $(document).on("click", "#add-product", function(){
 	});
 });
 
-$(document).on("click",".delete-button",function(){
+$(document).on("click", ".delete-button", function() {
 	$.ajax({
 		url: "https://ga-wdi-products-inventory-api.herokuapp.com/products/" + $(this).attr("id"),
 		type: "DELETE",
 		success: function(){
-			location.reload();
+			window.location.href = "#index";
 		},
 		error: function() {
 			alert("everything's ruined");

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Product Manager Application</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+	<style>
+		.smaller {
+			width:600px;
+			margin-left:auto;
+			margin-right:auto;
+		}
+
+		.margin-top-40 {
+			margin-top:40px;
+		}
+
+		.bold {
+			font-weight:bold;
+		}
+
+		.margin-top-10 {
+			margin-top:10px;
+		}
+
+		.txt-center {
+			text-align:center;
+		}
+	</style>
+</head>
+
+<body>
+
+<div id="content"></div>
+
+<script type="x-handlebars-template" id="show-products-template">
+	<div class="container margin-top-40">
+		<div>
+			<a data-toggle="modal" data-target="#add-product-modal" class="btn btn-primary">Add New Product</a>
+		</div>
+		<table class="table striped">
+			<thead>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Count</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+				{{#each productData}}
+				<tr>
+					<td>{{title}}</td>
+					<td>{{desc}}</td>
+					<td>{{count}}</td>
+					<td>
+						<a href="#edit/{{id}}" class="btn btn-primary">Edit</a>
+						<a href="#" class="btn btn-danger delete-button" id="{{id}}">Delete</a>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</script>
+
+<script type="x-handlebars-template" id="edit-product-template">
+	<div class="well smaller margin-top-40">
+		<div class="bold">
+			Name
+		</div>
+		<div class="margin-top-10">
+			<input type="text" class="form-control" name="title" value="{{title}}"  />
+		</div>
+		<div class="bold margin-top-10">
+			Description
+		</div>
+		<div class="margin-top-10">
+			<input type="text" class="form-control" name="desc" value="{{desc}}" />
+		</div>
+		<div class="bold margin-top-10">
+			Count
+		</div>
+		<div class="margin-top-10">
+			<input type="text" class="form-control" name="count" value="{{count}}"/>
+		</div>
+		<div class="margin-top-10 txt-center">
+			<a href="#" class="btn btn-success" id="submit-edits" edit_id="{{id}}">Submit Edits</a>
+		</div>
+	</div>
+</script>
+
+<div id="add-product-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">Add a New Product</h4>
+			</div>
+			<div class="modal-body">
+				<div class="bold">
+					Title
+				</div>
+				<div class="margin-top-10">
+					<input type="text" class="form-control" id="add-title"/>
+				</div>
+				<div class="bold margin-top-10">
+					Description
+				</div>
+				<div class="margin-top-10">
+					<input type="text" class="form-control" id="add-desc" />
+				</div>
+				<div class="bold margin-top-10">
+					Count
+				</div>
+				<div class="margin-top-10">
+					<input type="text" class="form-control"  id="add-count"/>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="add-product">Add New Product</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="libraries/handlebars.js"></script>
+<script src="libraries/underscore.min.js"></script>
+<script src="libraries/backbone.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+
+</html>
